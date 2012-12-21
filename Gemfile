@@ -7,12 +7,15 @@ gem 'rails', '3.2.8'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec-rails'
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+  gem 'shoulda-matchers'
+  gem 'spork-rails'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :production do
