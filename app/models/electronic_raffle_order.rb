@@ -5,4 +5,6 @@ class ElectronicRaffleOrder < ActiveRecord::Base
   
   validates_format_of :email, :with => /^.+@.+$/
   
+  delegate :first_name, :last_name, :quantity, :phone, :to => :basic_order_detail
+  
 end

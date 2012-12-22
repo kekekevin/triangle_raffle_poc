@@ -1,0 +1,24 @@
+%h1 Order index
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Address 1
+      %th Address 2
+      %th Email
+      %th Phone
+      %th Quantity
+  %tbody
+    - @electronic_raffle_orders.each do |order|
+      %tr
+        %td= order.first_name
+        %td= order.last_name
+        %td= order.address1
+        %td= order.address2
+        %td= order.email
+        %td= order.phone
+        %td= order.quantity
+        
+	

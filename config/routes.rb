@@ -1,8 +1,14 @@
 TriangleRaffle::Application.routes.draw do
   
+  get "order/index"
+
+  get "order_controller/index"
+
   get "home/index"
 
   root :to => "home#index"
+  
+  resources :orders
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
