@@ -3,6 +3,7 @@
 %table.table.table-hover
   %thead
     %tr
+      %th ID
       %th First Name
       %th Last Name
       %th Address 1
@@ -13,6 +14,7 @@
   %tbody
     - @electronic_raffle_orders.each do |order|
       %tr
+        %td= order.id
         %td= order.first_name
         %td= order.last_name
         %td= order.address1
