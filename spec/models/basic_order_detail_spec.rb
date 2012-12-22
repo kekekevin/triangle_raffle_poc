@@ -13,4 +13,9 @@ describe BasicOrderDetail do
     basic_order_detail.should_not be_valid
   end
   
+  it 'should belong to an orderable' do
+    basic_order_detail = FactoryGirl.build(:basic_order_detail, :orderable => FactoryGirl.build(:electronic_raffle_order))
+    basic_order_detail.orderable.should_not be_nil    
+  end
+  
 end

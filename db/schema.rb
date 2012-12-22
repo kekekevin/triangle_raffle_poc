@@ -11,24 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221194146) do
+ActiveRecord::Schema.define(:version => 20121222030222) do
 
   create_table "basic_order_details", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "quantity"
     t.string   "phone"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "orderable_id"
+    t.string   "orderable_type"
   end
 
   create_table "electronic_raffle_orders", :force => true do |t|
     t.string   "address1"
     t.string   "address2"
     t.string   "email"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.integer  "basic_order_detail_id", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

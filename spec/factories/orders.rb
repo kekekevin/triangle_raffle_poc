@@ -11,7 +11,7 @@ FactoryGirl.define do
     address1 "23 pueblo"
     address2 "apt 2"
     email "joe@joe.com"
-    association :basic_order_detail, factory: :basic_order_detail
+    association :basic_order_detail
   end
   
 end
