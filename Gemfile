@@ -16,6 +16,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'spork-rails'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
 end
 
 group :production do
