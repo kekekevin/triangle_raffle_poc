@@ -1,0 +1,37 @@
+= form_for @order do |f|
+
+  %fieldset
+    %legend Ticket Information
+    
+    = f.label :first_name
+    = f.text_field :first_name
+  
+    = f.label :last_name
+    = f.text_field :last_name
+    
+    = f.label :phone
+    = f.text_field :phone
+    
+    = f.label :address1, "Address"
+    = f.text_field :address1
+    = f.text_field :address2
+    
+    = f.label :email
+    = f.text_field :email
+    
+    = f.label :quantity
+    = f.text_field :quantity
+    
+    %legend Credit Card
+    
+    = label_tag :card_number, "Credit Card Number"
+    = text_field_tag :card_number, nil, name: nil
+
+    = label_tag :card_code, "Security Code on Card (CVV)"
+    = text_field_tag :card_code, nil, name: nil
+    
+    = label_tag :card_month, "Card Expiration"
+    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+    
+    = f.submit "Purchase", :class => "btn-primary", :id => "purchase"
