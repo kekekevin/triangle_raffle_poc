@@ -8,6 +8,6 @@ class BasicOrderDetail < ActiveRecord::Base
   
   validates_presence_of :last_name
   
-  validates :quantity, :numericality => { :only_integer => true, :greater_than => 0 }
+  validates :quantity, :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
   
 end

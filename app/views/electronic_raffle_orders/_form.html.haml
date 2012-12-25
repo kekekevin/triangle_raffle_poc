@@ -1,37 +1,43 @@
-= form_for @order do |f|
-
+= simple_form_for(@order, :html => {:class => 'form-horizontal' }) do |f|
+  
   %fieldset
     %legend Ticket Information
+    = f.hidden_field :stripe_token
+    = f.hidden_field :card_last_4_digits
+    = f.hidden_field :card_type
     
-    = f.label :first_name
-    = f.text_field :first_name
-  
-    = f.label :last_name
-    = f.text_field :last_name
+    = f.simple_fields_for :basic_order_detail do |basic|
     
-    = f.label :phone
-    = f.text_field :phone
+      = basic.input :first_name
     
-    = f.label :address1, "Address"
-    = f.text_field :address1
-    = f.text_field :address2
+      = basic.input :last_name
+      
+      = basic.input :phone
     
-    = f.label :email
-    = f.text_field :email
+    = f.input :address1, :label => "Address"
+    = f.input :address2, :label => false
     
-    = f.label :quantity
-    = f.text_field :quantity
+    = f.input :email
     
-    %legend Credit Card
+    = f.simple_fields_for :basic_order_detail do |basic|
     
-    = label_tag :card_number, "Credit Card Number"
-    = text_field_tag :card_number, nil, name: nil
+      = basic.input :quantity, :collection => 1..20
+    
 
-    = label_tag :card_code, "Security Code on Card (CVV)"
-    = text_field_tag :card_code, nil, name: nil
+  - if @order.stripe_token.present?
+    .control-group.string.required
+      %label.string.control-label Credit Card
+      .controls
+        = text_field_tag :credit_card, "Using #{@order.card_type} credit card provided with last 4 digits: #{@order.card_last_4_digits}", :class => "span5", :disabled => true
+  - else
+    =render 'credit_card_form'
     
-    = label_tag :card_month, "Card Expiration"
-    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-    
-    = f.submit "Purchase", :class => "btn-primary", :id => "purchase"
+  .control-group.string.required
+    %label.string.control-label Total
+    .controls
+      .input-append.input-prepend
+        .add-on $
+        = text_field_tag :total, nil, :class => "span1", :disabled => true
+        .add-on .00
+  .form-actions
+    = f.submit "Purchase Tickets", :class => "btn-primary", :id => "purchase"

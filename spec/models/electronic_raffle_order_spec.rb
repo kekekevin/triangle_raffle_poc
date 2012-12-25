@@ -5,6 +5,8 @@ describe ElectronicRaffleOrder do
     FactoryGirl.build(:electronic_raffle_order)
   end
 
+  it { should validate_presence_of :email } 
+
   it { should_not allow_value("asdf").for(:email) }
   
   it { should allow_value("asdf@asdf.com").for(:email) }

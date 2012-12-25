@@ -1,0 +1,21 @@
+.control-group.string.required
+  = label_tag :card_number, :class => "string required control-label" do
+    %abbr{:title => "required"} *
+    Credit Card Number
+  .controls
+    = text_field_tag :card_number, nil, {:name => nil, :class => "string required", :autocomplete => "off" }
+    
+.control-group.string.required
+  = label_tag :card_code, :class => "string required control-label" do
+    %abbr{:title => "required"} *
+    Security Code on Card (CVV)
+  .controls
+    = text_field_tag :card_code, nil, {:name => nil, :class => "string required", :autocomplete => "off" }
+
+.control-group.date.required
+  = label_tag :card_month, :class => "date required control-label" do
+    %abbr{:title => "required"} *
+    Card Expiration
+  .controls
+    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
