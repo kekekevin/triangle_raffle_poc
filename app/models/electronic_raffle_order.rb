@@ -13,8 +13,18 @@ class ElectronicRaffleOrder < ActiveRecord::Base
   
   def save_with_payment
     if valid?
+      Stripe::Charge.create(
+        :amount => quantity * 50 * 100,
+        :currency => "usd",
+        :card => stripe_token,
+        :description => "Triangle Raffle Tickets"
+      )
       save!
     end
+  rescue Stripe::StripeError => e
+    logger.error "Stripe error while charging customer: #{e.message}"
+    errors.add :base, "There was a problem with the purchase."
+    false
   end
   
 end
