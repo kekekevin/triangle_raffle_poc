@@ -2,8 +2,6 @@ jQuery ->
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
   order.calculateTotal($('#electronic_raffle_order_basic_order_detail_attributes_quantity').val())
   order.setupForm()
-  $('#purchase').prop('disabled', false)
-
   
 order = 
   calculateTotal: (quantity) ->

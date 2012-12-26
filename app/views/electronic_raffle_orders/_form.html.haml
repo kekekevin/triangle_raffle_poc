@@ -7,11 +7,8 @@
     = f.hidden_field :card_type
     
     = f.simple_fields_for :basic_order_detail do |basic|
-    
       = basic.input :first_name
-    
       = basic.input :last_name
-      
       = basic.input :phone
     
     = f.input :address1, :label => "Address"
@@ -20,7 +17,6 @@
     = f.input :email
     
     = f.simple_fields_for :basic_order_detail do |basic|
-    
       = basic.input :quantity, :collection => 1..20
     
 
@@ -40,4 +36,4 @@
         = text_field_tag :total, nil, :class => "span1", :disabled => true
         .add-on .00
   .form-actions
-    = f.submit "Purchase Tickets", :class => "btn-primary", :id => "purchase", :disabled => true
+    = f.submit "Purchase Tickets", :class => "btn-primary", :id => "purchase"

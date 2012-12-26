@@ -5,6 +5,8 @@ class ElectronicRaffleOrder < ActiveRecord::Base
   
   has_one :basic_order_detail, :as => :orderable
   
+  validates_presence_of :stripe_token
+  
   validates :email, :presence => true, :format => {:with => /^.+@.+$/}
   
   delegate :first_name, :last_name, :quantity, :phone, :to => :basic_order_detail, :allow_nil => true
