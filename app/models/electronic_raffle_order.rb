@@ -16,18 +16,19 @@ class ElectronicRaffleOrder < ActiveRecord::Base
   def save_with_payment
     if valid?
       total_dollars = quantity * 50
-      self.total = BigDecimal(total_dollars)
-      Stripe::Charge.create(
+      stripe_response = Stripe::Charge.create(
         :amount => total_dollars * 100, #stripe charges amounts in cents
         :currency => "usd",
         :card => stripe_token,
         :description => "Triangle Raffle Tickets"
       )
+      self.total = BigDecimal(stripe_response["amount"] / 100)
       save!
     end
   rescue Stripe::StripeError => e
     logger.error "Stripe error while charging customer: #{e.message}"
     errors.add :base, "There was a problem with the purchase."
+    self.stripe_token = nil
     false
   end
   

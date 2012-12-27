@@ -46,15 +46,9 @@ describe ElectronicRaffleOrder do
         subject.should_receive(:valid?).at_least(:once).and_return(true)
       end
       
-      it 'should call save!' do
-        Stripe::Charge.should_receive(:create)
-        subject.should_receive(:save!)
-        subject.save_with_payment
-      end
-      
       it 'should create a charge' do
         subject.stripe_token = "xdfs"
-        Stripe::Charge.should_receive(:create).with(:amount => 5000, :currency => "usd", :card => "xdfs", :description => "Triangle Raffle Tickets")
+        Stripe::Charge.should_receive(:create).with(:amount => 5000, :currency => "usd", :card => "xdfs", :description => "Triangle Raffle Tickets").and_return({"amount" => 8889})
         subject.save_with_payment
       end
       
@@ -69,9 +63,27 @@ describe ElectronicRaffleOrder do
         subject.errors.get(:base).should_not be_nil
       end
       
-      it 'should save the total' do
+      it 'should clear the stripe token if there is an error' do
+        subject.stripe_token = "token"
+        Stripe::Charge.should_receive(:create).and_raise(Stripe::CardError.new("message", "param", "code"))
         subject.save_with_payment
-        subject.total.should == BigDecimal('50.00')
+        subject.stripe_token.should be_nil
+      end
+      
+      describe 'with a success response from stripe' do
+        before(:each) do
+          Stripe::Charge.should_receive(:create).and_return({"amount" => 9000})  
+        end
+        
+        it 'should save the total' do
+          subject.save_with_payment
+          subject.total.should == BigDecimal('90.00')
+        end
+
+        it 'should call save!' do
+          subject.should_receive(:save!)
+          subject.save_with_payment
+        end
       end
       
     end
