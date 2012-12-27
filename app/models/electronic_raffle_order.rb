@@ -22,6 +22,7 @@ class ElectronicRaffleOrder < ActiveRecord::Base
         :card => stripe_token,
         :description => "Triangle Raffle Tickets"
       )
+      logger.info stripe_response
       self.total = BigDecimal(stripe_response["amount"]) / BigDecimal("100")
       save!
     end
