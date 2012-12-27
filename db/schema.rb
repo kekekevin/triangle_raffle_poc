@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222030222) do
+ActiveRecord::Schema.define(:version => 20121227042421) do
 
   create_table "basic_order_details", :force => true do |t|
     t.string   "first_name"
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(:version => 20121222030222) do
     t.string   "address1"
     t.string   "address2"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.decimal  "total",      :precision => 2, :scale => 8, :default => 0.0, :null => false
   end
 
 end

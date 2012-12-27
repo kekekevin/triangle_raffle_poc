@@ -15,8 +15,10 @@ class ElectronicRaffleOrder < ActiveRecord::Base
   
   def save_with_payment
     if valid?
+      total_dollars = quantity * 50
+      self.total = BigDecimal(total_dollars)
       Stripe::Charge.create(
-        :amount => quantity * 50 * 100,
+        :amount => total_dollars * 100, #stripe charges amounts in cents
         :currency => "usd",
         :card => stripe_token,
         :description => "Triangle Raffle Tickets"

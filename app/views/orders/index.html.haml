@@ -11,6 +11,7 @@
       %th Email
       %th Phone
       %th Quantity
+      %th Total
   %tbody
     - @electronic_raffle_orders.each do |order|
       %tr
@@ -22,5 +23,6 @@
         %td= order.email
         %td= order.phone
         %td= order.quantity
+        %td= number_to_currency(order.total)
         
 	

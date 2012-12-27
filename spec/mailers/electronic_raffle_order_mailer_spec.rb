@@ -26,4 +26,10 @@ describe ElectronicRaffleOrderMailer do
     mail.body.encoded.should match("Purchase Quantity:")
     mail.body.encoded.should match("#{order.quantity}")
   end
+  
+  it 'should contain the total' do
+    order.total = BigDecimal("50.00")
+    mail.body.encoded.should match("Total:")
+    mail.body.encoded.should match(/\$50\.00/)
+  end
 end

@@ -19,9 +19,7 @@ describe ElectronicRaffleOrdersController do
   end
   
   describe 'creating an electronic raffle order' do
-    
     describe 'with a valid order' do
-      
       let(:mail) { mock('ElectronicRaffleOrderMailer') }
       
       before(:each) do

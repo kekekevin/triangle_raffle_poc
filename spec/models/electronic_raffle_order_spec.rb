@@ -34,33 +34,46 @@ describe ElectronicRaffleOrder do
   end
   
   describe 'save_with_payment' do
-    it 'should call save! if valid' do
-      subject.should_receive(:valid?).at_least(:once).and_return(true)
-      Stripe::Charge.should_receive(:create)
-      subject.should_receive(:save!)
-      subject.save_with_payment
-    end
+    
     it 'should should not save! if invalid' do
       subject.should_receive(:valid?).at_least(:once).and_return(false)
       subject.should_not_receive(:save!)
       subject.save_with_payment
     end
-    it 'should create a charge if valid' do
-      subject.stripe_token = "xdfs"
-      subject.should_receive(:valid?).at_least(:once).and_return(true)
-      Stripe::Charge.should_receive(:create).with(:amount => 5000, :currency => "usd", :card => "xdfs", :description => "Triangle Raffle Tickets")
-      subject.save_with_payment
-    end
-    it 'should return an error on invalid request to stripe' do
-      subject.should_receive(:valid?).at_least(:once).and_return(true)
-      Stripe::Charge.should_receive(:create).and_raise(Stripe::InvalidRequestError.new("message", "param"))
-      subject.save_with_payment.should == false
-    end
-    it 'should return an error on card error to stripe' do
-      subject.should_receive(:valid?).at_least(:once).and_return(true)
-      Stripe::Charge.should_receive(:create).and_raise(Stripe::CardError.new("message", "param", "code"))
-      subject.save_with_payment.should == false
-      subject.errors.get(:base).should_not be_nil
+    
+    describe 'with a valid order' do
+      before(:each) do
+        subject.should_receive(:valid?).at_least(:once).and_return(true)
+      end
+      
+      it 'should call save!' do
+        Stripe::Charge.should_receive(:create)
+        subject.should_receive(:save!)
+        subject.save_with_payment
+      end
+      
+      it 'should create a charge' do
+        subject.stripe_token = "xdfs"
+        Stripe::Charge.should_receive(:create).with(:amount => 5000, :currency => "usd", :card => "xdfs", :description => "Triangle Raffle Tickets")
+        subject.save_with_payment
+      end
+      
+      it 'should return an error on invalid request to stripe' do
+        Stripe::Charge.should_receive(:create).and_raise(Stripe::InvalidRequestError.new("message", "param"))
+        subject.save_with_payment.should == false
+      end
+      
+      it 'should return an error on card error to stripe' do
+        Stripe::Charge.should_receive(:create).and_raise(Stripe::CardError.new("message", "param", "code"))
+        subject.save_with_payment.should == false
+        subject.errors.get(:base).should_not be_nil
+      end
+      
+      it 'should save the total' do
+        subject.save_with_payment
+        subject.total.should == BigDecimal('50.00')
+      end
+      
     end
   end
 end
