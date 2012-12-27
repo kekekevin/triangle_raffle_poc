@@ -4,20 +4,23 @@
 
 %table
   %tr
+    %td Order ID:
+    %td= @order.id
+  %tr
     %td Name:
     %td= "#{@order.first_name} #{@order.last_name}"
   %tr
     %td Address:
-    %td= "#{@order.address1}"
+    %td= @order.address1
   %tr
     %td
-    %td= "#{@order.address2}"
+    %td= @order.address2
   %tr
     %td Email:
-    %td= "#{@order.email}"
+    %td= @order.email
   %tr
     %td Purchase Quantity:
-    %td= "#{@order.quantity}"
+    %td= @order.quantity
   %tr
     %td Total:
     %td= number_to_currency(@order.total)

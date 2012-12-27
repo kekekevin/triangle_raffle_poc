@@ -1,0 +1,35 @@
+.page-header
+  %h1
+    FAQ
+    %small Frequently Asked Questions
+    
+
+.well
+  %h3 Questions:
+  %ul
+    - faqs = []
+    - faqs << {:anchor => "blah", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah1", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah2", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah3", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah4", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah5", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah6", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah7", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah8", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah9", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah10", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs << {:anchor => "blah11", :question => "What about blah?", :answer => "Some witty remark"}
+    - faqs.each do |faq|
+      %li
+        = link_to faq[:question], static_path(:faq, :anchor => faq[:anchor])
+    
+%ul.unstyled
+  - faqs.each do |faq|
+    .well
+      %li{:id => faq[:anchor]}
+        %span.label.label-info Question
+        = faq[:question]
+      %li
+        %span.label Answer
+        = faq[:answer]

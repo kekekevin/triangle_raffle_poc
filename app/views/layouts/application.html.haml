@@ -8,4 +8,25 @@
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
   %body
     .container-fluid
+      .navbar
+        .navbar-inner
+          = link_to "Triangle", :home_index, :class => "brand"
+          %ul.nav.pull-right
+            %li
+              = link_to "Tickets", new_electronic_raffle_order_path
+            %li
+              %a Dealership 
+            %li
+              = link_to "Contact", static_path(:contact)
+            %li
+              = link_to "FAQ", static_path(:faq)
+
+    .container-fluid
       = yield
+      
+      %hr.featurette-divider
+      
+      %footer
+        %p 
+          Some Legal Stuff &middot;
+          %a= link_to "Terms and Conditions", static_path(:terms)

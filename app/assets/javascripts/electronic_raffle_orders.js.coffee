@@ -10,10 +10,11 @@ order =
     else
       $('#total').val(0)
   setupForm: ->
+    $('#purchase').button()
     $('#electronic_raffle_order_basic_order_detail_attributes_quantity').change ->
       order.calculateTotal($(this).val())
     $('#new_electronic_raffle_order').submit ->
-      $('#purchase').prop('disabled', true)
+      $('#purchase').button('loading')
       if $('#card_number').length
         order.processCard()
         false
@@ -35,10 +36,6 @@ order =
       $('#electronic_raffle_order_card_type').val(response.card.type)
       $('#electronic_raffle_order_card_last_4_digits').val(response.card.last4)
       $('#new_electronic_raffle_order')[0].submit()
-      $('#card_number').closest('.control-group').removeClass('error')
-      $('#card_code').closest('.control-group').removeClass('error')
-      $('#card_month').closest('.control-group').removeClass('error')
-      $('#card_year').closest('.control-group').removeClass('error')
     else
       $('#new_electronic_raffle_order legend')
         .after($("<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>×</button><strong>Warning</strong> There is an issue with the credit card that has been provided. </div>"))
@@ -50,5 +47,4 @@ order =
       $('#card_code').closest('.control-group').addClass('error')
       $('#card_month').closest('.control-group').addClass('error')
       $('#card_year').closest('.control-group').addClass('error')
-      $('#purchase').prop('disabled', false)
-
+      $('#purchase').button('reset')

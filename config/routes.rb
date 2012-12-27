@@ -4,10 +4,9 @@ TriangleRaffle::Application.routes.draw do
   
   resources :electronic_raffle_orders
   
-  # get "orders/electronic", :as => :electronic_raffle_orders
-  # post "orders/create_electronic_raffle_order", :as => :electronic_raffle_orders
-
   get "home/index"
+  
+  match ':action' => 'static#:action', :as => :static
 
   root :to => "home#index"
   
