@@ -9,6 +9,7 @@ class ElectronicRaffleOrdersController < ApplicationController
   def create
     @order = ElectronicRaffleOrder.new(params[:electronic_raffle_order])
     if @order.save_with_payment
+      ElectronicRaffleOrderMailer.electronic_order_confirmation(@order).deliver
       redirect_to @order
     else
       render :new

@@ -1,0 +1,20 @@
+%h1= "Thank you for your Triangle Raffle ticket purchase, #{@order.first_name} #{@order.last_name}!"
+
+%h2 Your Order Summary
+
+%table
+  %tr
+    %td Name:
+    %td= "#{@order.first_name} #{@order.last_name}"
+  %tr
+    %td Address:
+    %td= "#{@order.address1}"
+  %tr
+    %td
+    %td= "#{@order.address2}"
+  %tr
+    %td Email:
+    %td= "#{@order.email}"
+  %tr
+    %td Purchase Quantity:
+    %td= "#{@order.quantity}"
