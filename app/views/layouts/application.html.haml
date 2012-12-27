@@ -3,14 +3,13 @@
   %head
     %title Triangle Raffle
     = stylesheet_link_tag    "application", :media => "all"
-    = javascript_include_tag "https://js.stripe.com/v1/", "application"
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
   %body
     .container-fluid
       .navbar
         .navbar-inner
-          = link_to "Triangle", :home_index, :class => "brand"
+          = link_to "Triangle Raffle", :home_index, :class => "brand"
           %ul.nav.pull-right
             %li
               = link_to "Tickets", new_electronic_raffle_order_path
@@ -20,11 +19,15 @@
               = link_to "Contact", static_path(:contact)
             %li
               = link_to "FAQ", static_path(:faq)
-
+    -unless Rails.env.production?
+      .alert.alert-info
+        %strong Note: 
+        You are currently accessing the testing version of this site. Any functionality is solely for testing purposes.
+        
     .container-fluid
       = yield
       
-      %hr.featurette-divider
+      %hr
       
       %footer
         %p 
