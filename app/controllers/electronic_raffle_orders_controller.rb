@@ -1,5 +1,7 @@
 class ElectronicRaffleOrdersController < ApplicationController
   
+  force_ssl
+  
   def new
     @order = ElectronicRaffleOrder.new
     @basic_order_detail = BasicOrderDetail.new
