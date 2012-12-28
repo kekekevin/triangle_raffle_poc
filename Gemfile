@@ -44,6 +44,7 @@ gem 'bootstrap-sass', '~> 2.2.1.1'
 gem 'jquery-rails'
 gem 'stripe'
 gem 'simple_form'
+gem 'newrelic_rpm'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
