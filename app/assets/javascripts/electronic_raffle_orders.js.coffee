@@ -1,7 +1,9 @@
 jQuery ->
-  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-  order.calculateTotal($('#electronic_raffle_order_basic_order_detail_attributes_quantity').val())
-  order.setupForm()
+  if $('.electronic_raffle_orders').length
+    $.externalScript('https://js.stripe.com/v1/').done (script, textStatus) ->
+      Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+      order.calculateTotal($('#electronic_raffle_order_basic_order_detail_attributes_quantity').val())
+      order.setupForm()
   
 order = 
   calculateTotal: (quantity) ->
@@ -32,19 +34,25 @@ order =
   handleStripeResponse: (status, response) ->
     $('.alert').remove()
     if status == 200
-      $('#electronic_raffle_order_stripe_token').val(response.id)
-      $('#electronic_raffle_order_card_type').val(response.card.type)
-      $('#electronic_raffle_order_card_last_4_digits').val(response.card.last4)
-      $('#new_electronic_raffle_order')[0].submit()
+      order.handleStripeSuccess(response)
     else
-      $('#new_electronic_raffle_order legend')
-        .after($("<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>×</button><strong>Warning</strong> There is an issue with the credit card that has been provided. </div>"))
-      $('.alert.alert-error').append(response.error.message)
-      $('html, body').animate(
-        { scrollTop: $(".alert.alert-error").offset().top },
-        500)        
-      $('#card_number').closest('.control-group').addClass('error')
-      $('#card_code').closest('.control-group').addClass('error')
-      $('#card_month').closest('.control-group').addClass('error')
-      $('#card_year').closest('.control-group').addClass('error')
-      $('#purchase').button('reset')
+      order.handleStripeError(response)
+  
+  handleStripeSuccess: (response) ->
+    $('#electronic_raffle_order_stripe_token').val(response.id)
+    $('#electronic_raffle_order_card_type').val(response.card.type)
+    $('#electronic_raffle_order_card_last_4_digits').val(response.card.last4)
+    $('#new_electronic_raffle_order')[0].submit()
+  
+  handleStripeError: (response) ->
+    $('#new_electronic_raffle_order legend')
+      .after($("<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>×</button><strong>Warning</strong> There is an issue with the credit card that has been provided. </div>"))
+    $('.alert.alert-error').append(response.error.message)
+    $('html, body').animate(
+      { scrollTop: $(".alert.alert-error").offset().top },
+      500)        
+    $('#card_number').closest('.control-group').addClass('error')
+    $('#card_code').closest('.control-group').addClass('error')
+    $('#card_month').closest('.control-group').addClass('error')
+    $('#card_year').closest('.control-group').addClass('error')
+    $('#purchase').button('reset')

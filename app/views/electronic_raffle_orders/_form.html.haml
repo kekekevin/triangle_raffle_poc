@@ -17,7 +17,7 @@
     = f.input :email
     
     = f.simple_fields_for :basic_order_detail do |basic|
-      = basic.input :quantity, :collection => 1..20
+      = basic.input :quantity, :collection => 1..20, :input_html => { :class => "span1"}
     
 
   - if @order.stripe_token.present?
@@ -37,3 +37,4 @@
         .add-on .00
   .form-actions
     = f.submit "Purchase Tickets", :class => "btn-primary", :id => "purchase", "data-loading-text" => "Processing..."
+    = link_to "Cancel", home_index_path, :class => "btn"

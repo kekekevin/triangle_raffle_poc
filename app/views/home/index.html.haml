@@ -1,13 +1,42 @@
-.page-header
-  %h1
-    Triangle Car Raffle
-    %small by the Armour Chapter
-    
 .container-fluid
   .row-fluid
+    .span12
+      .carousel.slide#carousel
+        .carousel-inner
+          .active.item
+            %img{:src => "/slide-03.jpg", :alt => ""}
+            .carousel-caption
+              %p 
+                You get a car, and you get a car, and you get a car!
+                =link_to "Buy a ticket!", new_electronic_raffle_order_path, :class => "btn pull-right"
+          .item
+            %img{:src => "/slide-01.jpg", :alt => ""}
+            .carousel-caption
+              %p Some text
+          .item
+            %img{:src => "/slide-02.jpg", :alt => ""}
+            .carousel-caption
+              %p Some text
+        %a.carousel-control.left{:href => "#carousel", "data-slide" => "prev"} &lsaquo;
+        %a.carousel-control.right{:href => "#carousel", "data-slide" => "next"} &rsaquo;
   
 .container-fluid
   .row-fluid
+    .span8
+      .row-fluid
+        %h2 News
+        %p 
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        %p  
+          Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+        %p
+          Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
     .span4
-    .span4
-    .span4
+      .row-fluid
+        %h3 Triangle Fraternity
+        %p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+        %a.btn.pull-right Visit Triangle Fraternity
+      .row-fluid
+        %h3 The Dealership
+        %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+        %a.btn.pull-right Visit the Dealership
