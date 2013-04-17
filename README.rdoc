@@ -1,3 +1,9 @@
 == Triangle Raffle Proof of Concept
 
-This is a proof of concept I hashed out for my fraternity because we were looking at different options on how we could electronically host a car raffle that they were holding.  Building a web app from the ground up was one of the options and I didn't believe it'd be too hard to build with rails from the ground up so I attempted to see what I could do in a few weeks.  Development has stopped on this project currently but it is hosted currently here: https://triangle-raffle-test.herokuapp.com/
+This is a proof of concept I hashed out for my fraternity because we were looking at different options on how 
+we could electronically host a car raffle that they were holding.  Building a web app from the ground up was 
+one of the options and I didn't believe it'd be too hard to build with rails from the ground up so I attempted 
+to see what I could do in a few weeks.  Development has stopped on this project currently but it is hosted 
+currently here: https://triangle-raffle-test.herokuapp.com/
+
+Built on Rails and used Stripe for the payment processing.  Bootstrap was used for the look and feel.
